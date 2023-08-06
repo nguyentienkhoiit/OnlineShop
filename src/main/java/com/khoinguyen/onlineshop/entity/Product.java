@@ -12,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
     @Id
@@ -29,7 +30,15 @@ public class Product {
     String availability;
     String specification;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
    	@JoinColumn(name = "category_id")
     Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    Color color;
 }

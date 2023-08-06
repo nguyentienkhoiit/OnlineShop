@@ -1,5 +1,6 @@
 package com.khoinguyen.onlineshop.controller;
 
+import com.khoinguyen.onlineshop.dto.category.CategoryDTOUpdate;
 import com.khoinguyen.onlineshop.dto.category.CategoryDTOCreate;
 import com.khoinguyen.onlineshop.dto.category.CategoryDTOResponse;
 import com.khoinguyen.onlineshop.service.CategoryService;
@@ -32,5 +33,16 @@ public class CategoryController {
     @GetMapping("/{id}")
     public CategoryDTOResponse getCategoryById(@PathVariable int id) {
         return categoryService.getCategoryById(id);
+    }
+
+    @PutMapping("/{id}")
+    public CategoryDTOResponse updateCategory(@RequestBody CategoryDTOUpdate categoryDTOUpdate,
+                                              @PathVariable int id) {
+        return categoryService.updateCategory(categoryDTOUpdate, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public CategoryDTOResponse deleteCategory(@PathVariable int id) {
+        return categoryService.deleteCategory(id);
     }
 }

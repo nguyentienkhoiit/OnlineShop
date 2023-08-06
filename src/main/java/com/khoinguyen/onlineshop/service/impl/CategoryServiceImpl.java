@@ -2,6 +2,7 @@ package com.khoinguyen.onlineshop.service.impl;
 
 import com.khoinguyen.onlineshop.dto.category.CategoryDTOCreate;
 import com.khoinguyen.onlineshop.dto.category.CategoryDTOResponse;
+import com.khoinguyen.onlineshop.dto.category.CategoryDTOUpdate;
 import com.khoinguyen.onlineshop.entity.Category;
 import com.khoinguyen.onlineshop.exception.OnlineShopException;
 import com.khoinguyen.onlineshop.mapper.CategoryMapper;
@@ -40,6 +41,25 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository
                 .findById(id)
                 .orElseThrow(() -> OnlineShopException.notFound("Category doest not exist"));
+        return CategoryMapper.toCategoryDTOResponse(category);
+    }
+
+    @Override
+    public CategoryDTOResponse updateCategory(CategoryDTOUpdate categoryDTOUpdate, int id) {
+        Category category = categoryRepository
+                .findById(id)
+                .orElseThrow(() -> OnlineShopException.notFound("Category doest not exist"));
+        category = CategoryMapper.toCategory(categoryDTOUpdate, id);
+        category = categoryRepository.save(category);
+        return CategoryMapper.toCategoryDTOResponse(category);
+    }
+
+    @Override
+    public CategoryDTOResponse deleteCategory(int id) {
+        Category category = categoryRepository
+                .findById(id)
+                .orElseThrow(() -> OnlineShopException.notFound("Category doest not exist"));
+        categoryRepository.deleteById(id);
         return CategoryMapper.toCategoryDTOResponse(category);
     }
 }

@@ -1,8 +1,10 @@
 package com.khoinguyen.onlineshop.controller;
 
+import com.khoinguyen.onlineshop.dto.ProductDTOFilter;
+import com.khoinguyen.onlineshop.dto.product.PagingDTOResponse;
 import com.khoinguyen.onlineshop.dto.product.ProductDTOCreate;
 import com.khoinguyen.onlineshop.dto.product.ProductDTOResponse;
-import com.khoinguyen.onlineshop.entity.Product;
+import com.khoinguyen.onlineshop.dto.product.ProductDTOUpdate;
 import com.khoinguyen.onlineshop.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +22,9 @@ import static com.khoinguyen.onlineshop.util.Constant.API_VERSION;
 public class ProductController {
     ProductService productService;
 
-    @GetMapping()
-    public List<ProductDTOResponse> getAllProducts() {
-        return productService.getAllProducts();
+    @GetMapping("/search")
+    public PagingDTOResponse searchProduct(@ModelAttribute ProductDTOFilter productDTOFilter) {
+        return productService.searchProduct(productDTOFilter);
     }
 
     @GetMapping("/{id}")
@@ -33,5 +35,16 @@ public class ProductController {
     @PostMapping()
     public ProductDTOResponse createProduct(@RequestBody ProductDTOCreate productDTOCreate) {
         return productService.createProduct(productDTOCreate);
+    }
+
+    @PutMapping("/{id}")
+    public ProductDTOResponse updateProduct(@RequestBody ProductDTOUpdate productDTOUpdate,
+                                            @PathVariable int id) {
+        return productService.updateProduct(productDTOUpdate,id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ProductDTOResponse deleteProduct(@PathVariable int id) {
+        return productService.deleteProduct(id);
     }
 }

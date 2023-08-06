@@ -2,6 +2,7 @@ package com.khoinguyen.onlineshop.mapper;
 
 import com.khoinguyen.onlineshop.dto.product.ProductDTOCreate;
 import com.khoinguyen.onlineshop.dto.product.ProductDTOResponse;
+import com.khoinguyen.onlineshop.dto.product.ProductDTOUpdate;
 import com.khoinguyen.onlineshop.entity.Category;
 import com.khoinguyen.onlineshop.entity.Product;
 
@@ -33,6 +34,20 @@ public class ProductMapper {
                 .availability(productDTOCreate.getAvailability())
                 .specification(productDTOCreate.getSpecification())
                 .category(Category.builder().id(productDTOCreate.getCategoryId()).build())
+                .build();
+    }
+    public static Product toProduct(ProductDTOUpdate productDTOUpdate, int id) {
+        return Product.builder()
+                .id(id)
+                .name(productDTOUpdate.getName())
+                .price(productDTOUpdate.getPrice())
+                .quantity(productDTOUpdate.getQuantity())
+                .summary(productDTOUpdate.getSummary())
+                .description(productDTOUpdate.getDescription())
+                .imageUrl(productDTOUpdate.getImageUrl())
+                .availability(productDTOUpdate.getAvailability())
+                .specification(productDTOUpdate.getSpecification())
+                .category(Category.builder().id(productDTOUpdate.getCategoryId()).build())
                 .build();
     }
 }

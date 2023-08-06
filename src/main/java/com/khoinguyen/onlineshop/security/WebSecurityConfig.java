@@ -37,7 +37,6 @@ public class WebSecurityConfig {
                 .cors().disable()
                 .authorizeHttpRequests()
                 .antMatchers(String.format("%s/login", API_VERSION)).permitAll()
-                .antMatchers(HttpMethod.POST,String.format("%s/accounts", API_VERSION)).permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

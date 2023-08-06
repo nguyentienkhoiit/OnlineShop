@@ -2,6 +2,7 @@ package com.khoinguyen.onlineshop.mapper;
 
 import com.khoinguyen.onlineshop.dto.account.AccountDTOCreate;
 import com.khoinguyen.onlineshop.dto.account.AccountDTOResponse;
+import com.khoinguyen.onlineshop.dto.account.AccountDTOUpdate;
 import com.khoinguyen.onlineshop.dto.authentication.LoginDTOResponse;
 import com.khoinguyen.onlineshop.entity.Account;
 import com.khoinguyen.onlineshop.model.TokenPayload;
@@ -12,6 +13,15 @@ public class AccountMapper {
                 .username(accountDTOCreate.getUsername())
                 .password(accountDTOCreate.getPassword())
                 .email(accountDTOCreate.getEmail())
+                .build();
+    }
+
+    public static Account toAccount(AccountDTOUpdate accountDTOUpdate, Account account) {
+        return Account.builder()
+                .id(account.getId())
+                .email(account.getEmail())
+                .username(accountDTOUpdate.getUsername())
+                .password(accountDTOUpdate.getPassword())
                 .build();
     }
 
